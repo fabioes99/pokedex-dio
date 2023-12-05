@@ -1,9 +1,7 @@
 <template>
 	<div class="panel bg--red-04">
 		<div class="container bg--red-01">
-			<TopPanelButton>
-
-			</TopPanelButton>
+			<TopPanelButton v-for="(button, index) in buttons" :key="index" v-bind="button"/>
 		</div>
 	</div>
 </template>
@@ -13,7 +11,19 @@ import TopPanelButton from './TopPanelButton.vue'
 
 export default {
   name: 'TopPanel',
-	components: TopPanelButton
+	components: {
+		TopPanelButton
+	},
+	data(){
+		return {
+			buttons: [
+				{ style: { width: '50px', height: '50px' }, class: 'bg--blue-00' },
+					{ style: { width: '20px', height: '20px' }, class: 'bg--red-02' },
+					{ style: { width: '20px', height: '20px' }, class: 'bg--yellow' },
+					{ style: { width: '20px', height: '20px' }, class: 'bg--green' },
+			],
+		};
+	},
 
 };
 </script>
