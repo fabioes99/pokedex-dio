@@ -1,6 +1,7 @@
 <template>
 	<div class="panel" :class="{ open: isOpen }">
 		<div class="panel--front bg--red-01">
+			<div class="front--triangle" @click="isOpen = false"/>
 			<RightPanelContent />
 		</div>
 		<div class="panel--back bg--red-01" @click="isOpen = true">
@@ -88,6 +89,25 @@
 				border-left: $triangle-size solid transparent;
 				width: 0;
 				height: 0;
+
+				@media (min-width: $viewport-medium) {
+					border-top: $triangle-size solid transparent;
+					border-left: $triangle-size solid $triangle-color;
+					border-bottom: $triangle-size solid transparent;
+				}
+			}
+		}
+
+		&--front{
+			.front--triangle {
+				cursor: pointer;
+				border-top: $triangle-size solid $triangle-color;
+				border-right: $triangle-size solid transparent;
+				border-left: $triangle-size solid transparent;
+				width: 0;
+				height: 0;
+				position: absolute;
+				z-index: 10;
 
 				@media (min-width: $viewport-medium) {
 					border-top: $triangle-size solid transparent;

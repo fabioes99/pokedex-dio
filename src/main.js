@@ -1,9 +1,11 @@
 import Vue from 'vue';
-import scss from '../src/styles/main.scss';
+import './styles/main.scss';
 import App from './App.vue';
-
+import InfiniteLoading from 'vue-infinite-loading';
 
 Vue.config.productionTip = false;
+
+Vue.use(InfiniteLoading, {});
 
 new Vue({
   render: (h) => h(App),
