@@ -1,5 +1,5 @@
 <template>
-	<form class="search">
+	<div class="search">
 		<label for="search" class="search__label text--white bg--black">
 			<h3 class="search__label--text">[.g.: Charizard]</h3>
 			<input
@@ -7,18 +7,38 @@
 				v-model.trim="name"
 				type="text"
 				class="search__input"
+				@keyup.enter="searchPokemon"
 			/>
 		</label>
 
-		<button class="btn btn--search bg--gray text--yellow" @click.prevent >Search</button>
-	</form>
+		<div class="buttons">
+			<button class="btn btn--clear" @click.prevent="clear">
+				Clear
+			</button>
+			<button class="btn btn--search bg--gray text--yellow" @click.prevent="searchPokemon">
+				Search
+			</button>
+		</div>
+	</div>
 </template>
 
 <script>
+import { actions, mutations } from '@/store';
 
 export default {
   name: 'RightPanelContent',
-
+	data(){
+		return { name: '' };
+	},
+	methods: {
+		clear(){
+			this.name = '';
+			mutations.resetList();
+		},
+		async searchPokemon() {
+			await actions.searchPokemon(this.name);
+		},
+	}
 };
 </script>
 
@@ -61,6 +81,10 @@ export default {
 			}
 		}
 
+		.buttons {
+			display: flex;
+			justify-content: flex-end;
+			align-items: center;
 			.btn {
 				border-radius: 8px;
 				font-size: 18px;
@@ -68,15 +92,33 @@ export default {
 				cursor: pointer;
 				align-self: flex-end;
 
+
+
+				&--clear {
+					width: 80px;
+					padding: 8px;
+					margin-right: 16px;
+					border: none;
+					&:hover{
+						background-color: #ddd;
+					}
+				}
+
 				&--search {
-					width: 105px;
-					padding: 15px;
-					border: 4px solid color(black);
+					width: 80px;
+					padding: 8px;
+					border: none;
+					&:hover{
+						filter: brightness(1.2);
+					}
+				}
 
 					@media (min-width: $viewport-medium) {
 						width: 130px;
 					}
-				}
+
 			}
+
+		}
 	}
 </style>

@@ -89,6 +89,9 @@
 				border-left: $triangle-size solid transparent;
 				width: 0;
 				height: 0;
+				&:hover{
+					filter: brightness(1.2);
+				}
 
 				@media (min-width: $viewport-medium) {
 					border-top: $triangle-size solid transparent;
@@ -108,6 +111,9 @@
 				height: 0;
 				position: absolute;
 				z-index: 10;
+				&:hover{
+					filter: brightness(1.2);
+				}
 
 				@media (min-width: $viewport-medium) {
 					border-top: $triangle-size solid transparent;
