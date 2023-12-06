@@ -1,5 +1,5 @@
 <template>
-	<li class="list__item">
+	<li class="list__item" @click="selectPokemon">
 		<img :src="sprite" :alt="name" class="sprite">
 		<div class="informations">
 			<h3 class="identification">
@@ -16,6 +16,7 @@
 </template>
 
 <script>
+import { mutations, state } from '@/store';
 
 export default{
 	name: 'ListItem',
@@ -40,6 +41,11 @@ export default{
 			}
 		}
 
+	},
+	methods:{
+		selectPokemon(){
+			mutations.setPokemonId(this.id);
+		}
 	}
 }
 
@@ -51,6 +57,7 @@ export default{
 		justify-content: space-between;
 		align-items: center;
 		padding: 8px 24px;
+		cursor: pointer;
 
 		.informations {
 			display: flex;

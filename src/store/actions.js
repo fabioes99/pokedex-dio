@@ -71,6 +71,10 @@ export default {
 
 			const pokemon = state.tmpList.find(info => info.name.toLowerCase() === name.toLowerCase());
 
+			if(state.list[0].name.trim() == name.trim()){
+				return ;
+			}
+
 			if (pokemon) {
 				setPokemonSearched(pokemon);
 				return;
