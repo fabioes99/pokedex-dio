@@ -87,6 +87,54 @@ export default {
 			setIsSearching(false);
 		}
 	},
+	async getPokemonByType(type){
+		const {
+			overwriteList,
+			setIsPokemonSearch,
+			setListHasError,
+			setIsSearching,
+			resetList
+		} = mutations;
 
+		try {
+			setIsPokemonSearch(false);
+			setListHasError(false);
+			setIsSearching(true);
+			resetList();
+
+			const pokemonsList = await PokeAPI.getPokemonsByType(type.trim());
+
+			if (pokemonsList?.id) {
+
+				const prepareInfo = pokemonsList.pokemon.map(item => PokeAPI.getPokemonByName(item.pokemon.name));
+				const pokemonsInfo = await Promise.all(prepareInfo);
+				overwriteList(pokemonsInfo);
+				setIsSearching(false);
+			}
+
+
+		} catch (error) {
+			setListHasError(true);
+			setIsSearching(false);
+		}
+
+	},
+	async getExistingTypes(){
+		const {
+			setListHasError,
+			setExistingTypes
+		} = mutations;
+
+		try {
+
+			const types = await PokeAPI.getExistingTypes();
+
+			//console.log(types.results);
+			setExistingTypes(types.results);
+		}catch (error) {
+			setListHasError(true);
+
+		}
+	}
 
 }

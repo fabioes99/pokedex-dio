@@ -5,3 +5,7 @@
 .bg{
   @include modifiers($colors, 'background');
 }
+
+.border{
+  @include modifiers($colors, 'border');
+}

@@ -8,6 +8,9 @@ export default {
 		state.list.push(...list);
 		state.tmpList.push(...list);
 	},
+	overwriteList(list){
+		state.list = list;
+	},
 	setListHasNext(flag) {
 		state.listHasNext = flag;
 	},
@@ -40,8 +43,7 @@ export default {
 		state.isPokemonSearch = false;
 		state.pokemonId = id;
 	},
-	clearPokemonId(){
-		state.isPokemonSearch = false;
-		state.pokemonId = null;
+	setExistingTypes(list){
+		state.types = list;
 	}
 };
