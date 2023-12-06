@@ -45,6 +45,8 @@ export default{
 	methods:{
 		selectPokemon(){
 			mutations.setPokemonId(this.id);
+
+
 		}
 	}
 }

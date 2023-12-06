@@ -40,8 +40,7 @@ export default {
 		state.isPokemonSearch = false;
 		state.pokemonId = id;
 	},
-	clearPokemonId(){
-		state.isPokemonSearch = false;
-		state.pokemonId = null;
+	showStats(bool){
+		state.isShowingStats = bool;
 	}
 };

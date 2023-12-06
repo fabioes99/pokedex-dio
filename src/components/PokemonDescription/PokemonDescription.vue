@@ -1,18 +1,20 @@
 <template>
-	<div class="pokemon" v-if="">
+	<div class="pokemon"  >
 		<ListItem v-bind="mainInfo" />
-		<ul class="stats">
+		<ul class="stats" v-if="isShowingStats">
 			<li v-for="(stat, index) in stats" ::key="index">
 				{{ parseStatName(stat.stat.name) }}: {{ stat.base_stat }}
 			</li>
+			<button @click="close" class="close">Close</button>
 		</ul>
 	</div>
 </template>
 
 <script>
 import ListItem from '@/components/List/ListItem.vue';
-import { state } from '@/store';
+import { state, mutations } from '@/store';
 import { parsePokemonInfo } from '@/utils';
+
 
 const statsNames = {
 		hp: 'HP',
@@ -32,6 +34,11 @@ export default{
 			required: true
 		}
 	},
+	computed: {
+		isShowingStats(){
+				return state.isShowingStats;
+			},
+	},
 	data(){
 		return {
 			mainInfo: null,
@@ -40,7 +47,6 @@ export default{
 	},
 	created(){
 		const pokemonInfo = state.list.find(pokemon => pokemon.id === this.id);
-
 		if(pokemonInfo){
 			const infoParsed = parsePokemonInfo(pokemonInfo);
 
@@ -48,12 +54,16 @@ export default{
 
 			this.mainInfo = rest;
 			this.stats = stats;
+			mutations.showStats(true);
 
 		}
 	},
 	methods: {
 			parseStatName(name){
 				return statsNames[name] || name;
+			},
+			close(){
+				mutations.showStats(false);
 			}
 		}
 }
@@ -64,5 +74,16 @@ export default{
 <style lang="scss" scoped>
 	.stats {
 		padding: 0 24px;
+
+		.close{
+			width: auto;
+			margin-top: 6px;
+			border-radius: 7px;
+			border: none;
+			cursor:pointer;
+			&:hover{
+				background-color: #cacaca;
+			}
+		}
 	}
 </style>
